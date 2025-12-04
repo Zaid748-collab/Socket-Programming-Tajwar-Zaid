@@ -1,0 +1,18 @@
+COMPILATION:
+javac ChatServer.java ChatClient.java
+
+RUN SERVER (Terminal 1):
+java ChatServer
+
+RUN CLIENT 1 (Terminal 2):
+java ChatClient localhost 9999
+
+RUN CLIENT 2 (Terminal 3):
+java ChatClient localhost 9999
+
+RUN CLIENT 3 (Terminal 4):
+java ChatClient localhost 9999
+
+COMMANDS:
+- Type messages and press Enter to send
+- Type "/quit" to disconnect
