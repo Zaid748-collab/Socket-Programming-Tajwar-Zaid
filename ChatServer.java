@@ -11,15 +11,15 @@ public class ChatServer {
             Collections.synchronizedSet(new HashSet<>());
     private static ExecutorService pool = Executors.newCachedThreadPool();
 
-    // 🔒 LEVEL 3 ADDITION: rate limiting
+   
     private static final int MAX_CONNECTIONS_PER_IP = 3;
     private static Map<String, Integer> connectionCounts =
             new ConcurrentHashMap<>();
-    // 🔒 END LEVEL 3 ADDITION
+    
 
     public static void main(String[] args) {
 
-        // 🔐 TLS keystore configuration (MANDATORY)
+        
         System.setProperty("javax.net.ssl.keyStore", "server.jks");
         System.setProperty("javax.net.ssl.keyStorePassword", "password");
 
@@ -38,7 +38,7 @@ public class ChatServer {
                 Socket clientSocket = serverSocket.accept();
                 String clientIP = clientSocket.getInetAddress().getHostAddress();
 
-                // 🔒 LEVEL 3 ADDITION: enforce rate limit
+              
                 connectionCounts.putIfAbsent(clientIP, 0);
                 if (connectionCounts.get(clientIP) >= MAX_CONNECTIONS_PER_IP) {
                     System.out.println("[SERVER] Connection rejected from " + clientIP);
@@ -74,10 +74,10 @@ public class ChatServer {
     public static void removeClient(ClientHandler client) {
         clientHandlers.remove(client);
 
-        // 🔒 LEVEL 3 ADDITION: decrement connection count
+        
         String clientIP = client.socket.getInetAddress().getHostAddress();
         connectionCounts.put(clientIP, connectionCounts.get(clientIP) - 1);
-        // 🔒 END LEVEL 3 ADDITION
+     
 
         System.out.println("[SERVER] Client disconnected. Active clients: "
                 + clientHandlers.size());

@@ -1,6 +1,6 @@
-import javax.net.ssl.*;
 import java.io.*;
 import java.util.Scanner;
+import javax.net.ssl.*;
 
 public class ChatClient {
 
@@ -12,7 +12,7 @@ public class ChatClient {
 
     public ChatClient(String serverAddress, int port) {
         try {
-            // 🔐 Create TLS socket (REPLACES new Socket)
+            
             SSLSocketFactory factory =
                     (SSLSocketFactory) SSLSocketFactory.getDefault();
 
@@ -73,7 +73,7 @@ public class ChatClient {
 
     public static void main(String[] args) {
 
-        // 🔐 TLS truststore config (MUST be here)
+        
         System.setProperty("javax.net.ssl.trustStore", "server.jks");
         System.setProperty("javax.net.ssl.trustStorePassword", "password");
 
